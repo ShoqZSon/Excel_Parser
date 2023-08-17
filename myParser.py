@@ -31,7 +31,6 @@ def readData(sheet):
 
         return []
 
-
 def trimData(data):
     A = []
     for entry in data:
@@ -105,7 +104,6 @@ def main():
             for entry in group:
                 print(entry)
             print("\n")
-
 
     except Exception as e:
         print("An error occurred:", e)
