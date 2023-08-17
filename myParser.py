@@ -33,9 +33,11 @@ def readData(sheet):
 
 def trimData(data):
     A = []
-    for entry in data[1:]:
-        for group in entry[1:]:
-            A.append(group.split())
+    for entry in data:
+        for group in entry:
+            for val in group:
+                A.append(val.split())
+                print(A)
 
     return A
 
@@ -46,20 +48,21 @@ def packData(data, subjects):
     i = 0
     for entry in data:
         for val in entry:
-            if i != len(subjects):
-                sub_day.append(subjects[i])
-                sub_day.append(val)
-                group.append(sub_day)
-                sub_day = []
-                i += 1
-            else:
+            sub_day.append(subjects[i])
+            sub_day.append(val)
+            group.append(sub_day)
+            sub_day = []
+            i += 1
+            if i == len(subjects):
                 final.append(group)
                 group = []
                 i = 0
 
+
     for entry in final:
-        for val in entry:
-            print(val)
+        print(entry)
+
+    return final
 
 
 def main():
@@ -74,8 +77,9 @@ def main():
         data.remove(data[-1])
 
         if data:
-            packData(data, subjects)
-            #trimmedData.append(trimData(data))
+            packedData = packData(data, subjects)
+            trimmedData.append(trimData(packedData))
+            print(trimmedData)
         else:
             print("Error while reading")
             return -1
